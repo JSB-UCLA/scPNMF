@@ -46,7 +46,6 @@
 #' \item \url{https://github.com/richardbeare/pNMF}
 #' }
 #' 
-#' @examples 
 #'
 PNMFfun <- function(X, rank=10, tol=1e-3, maxIter=500, verboseN=FALSE, zerotol=1e-10, method="KL", label=NULL, mu=1, lambda=0.01, seed=123) {
   #nmfmod <- NMF::nmf(X, rank)

@@ -8,7 +8,7 @@
 #' @param ont Which gene ontology to use. One of "BP", "MF" or "CC". The default is "BP".
 #' @param OrgDb OrgDb to use.
 #' @param pvalueCutoff P-value cutoff on on enrichment tests to report. Default is 0.1.
-#' @param pvalueCutoff Q-value cutoff on on enrichment tests to report. Default is 0.1.
+#' @param qvalueCutoff Q-value cutoff on on enrichment tests to report. Default is 0.1.
 #' @param minGSSize Minimal size of genes annotated by Ontology term for testing. Default is 20.
 #' @param maxGSSize Maximal size of genes annotated by Ontology term for testing. Default is 100.
 #' @param simp If simplifying the GO terms. Default is FALSE.
@@ -46,6 +46,7 @@ basisAnnotate <- function(W,
 ) {
   stopifnot(!is.null(rownames(W)))
   
+  Cluster <- ID <- Description <- word <- NULL
   
   gene_num <- dim(W)[1]
   basis_num <- dim(W)[2]
@@ -86,7 +87,10 @@ basisAnnotate <- function(W,
       
       num_use <- min(word_num, dim(dat)[1])
       
-      p <- dat %>% dplyr::select(ID, Description) %>% .[1:num_use, ] %>%    tidytext::unnest_tokens(word, Description, token = "ngrams", n = 2) %>%
+      dat_p <- dat %>% dplyr::select(ID, Description)
+      dat_p <- dat_p[1:num_use,]
+      
+      p <-  dat_p %>% tidytext::unnest_tokens(word, Description, token = "ngrams", n = 2) %>%
         #anti_join(stop_words) %>%
         count(word, sort = TRUE) %>%
         dplyr::filter(n >= 2) %>%

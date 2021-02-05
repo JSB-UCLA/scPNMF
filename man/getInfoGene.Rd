@@ -7,9 +7,13 @@
 getInfoGene(W, M = 100, by_basis = FALSE, dim_use = NULL)
 }
 \arguments{
-\item{M}{}
+\item{W}{The weight matrix output by PNMF}
 
-\item{W_s}{}
+\item{M}{The user-defined informative gene number}
+
+\item{by_basis}{Return informative genes by basis or not}
+
+\item{dim_use}{The bases (columns) to be used in the selected weight matrix, \code{NULL} value uses all bases}
 }
 \value{
 A vector containing M top informative genes

@@ -34,7 +34,9 @@ basisAnnotate(
 
 \item{OrgDb}{OrgDb to use.}
 
-\item{pvalueCutoff}{Q-value cutoff on on enrichment tests to report. Default is 0.1.}
+\item{pvalueCutoff}{P-value cutoff on on enrichment tests to report. Default is 0.1.}
+
+\item{qvalueCutoff}{Q-value cutoff on on enrichment tests to report. Default is 0.1.}
 
 \item{minGSSize}{Minimal size of genes annotated by Ontology term for testing. Default is 20.}
 

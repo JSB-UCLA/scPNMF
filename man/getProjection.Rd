@@ -7,11 +7,9 @@
 getProjection(X, W_sM)
 }
 \arguments{
-\item{X}{}
+\item{X}{The input gene by cell logcount matrix}
 
-\item{W_s}{}
-
-\item{M}{}
+\item{W_sM}{The truncated, selected weight matrix}
 }
 \value{
 A K0 * cells matrix representing low-dimensional data projection

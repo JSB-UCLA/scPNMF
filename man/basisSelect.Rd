@@ -20,29 +20,29 @@ basisSelect(
 )
 }
 \arguments{
-\item{W}{}
+\item{W}{The weight matrix output by PNMF}
 
-\item{S}{}
+\item{S}{The score matrix output by PNMF}
 
-\item{X}{}
+\item{X}{The input gene by cell logcount matrix}
 
-\item{toTest}{}
+\item{toTest}{Whether to select bases by Pearson correlation w/ cell library size and test of multimodality}
 
-\item{cor_thres}{}
+\item{cor_thres}{Pearson correlation w/ cell library size cutoff. Default is 0.7.}
 
-\item{pval_thres}{}
+\item{pval_thres}{Adjusted p-value cutoff on test of multimodality. Default is 0.01.}
 
-\item{return_fig}{}
+\item{return_fig}{Whether to print scatter plot of score vector against cell library size and distribution of score vectors for each basis.}
 
-\item{adj_method}{}
+\item{adj_method}{P-value correction method. Default is "BH".}
 
-\item{mc.cores}{}
+\item{mc.cores}{The number of cores to use for function mclapply().}
 
-\item{nrow}{}
+\item{nrow}{Rows for facets in plots.}
 
-\item{toAnnotate}{}
+\item{toAnnotate}{Whether to perform Gene Ontology (GO) enrichment analysis on each basis}
 
-\item{dim_use}{}
+\item{dim_use}{The bases (columns) to be used in the selected weight matrix, \code{NULL} value uses all bases}
 }
 \value{
 The selected weight matrix

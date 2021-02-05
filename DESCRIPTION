@@ -5,7 +5,7 @@ Version: 1.0
 Date: 2021-02-03
 Author: Dongyuan Song, Kexin Li
 Maintainer: Dongyuan Song <dongyuansong@g.ucla.edu>, Kexin Li <aileenlikexin@outlook.com>
-Description: scPNMF: sparse gene encoding of single cells to facilitate gene selection for targeted gene profiling
+Description: scPNMF: sparse gene encoding of single cells to facilitate gene selection for targeted gene profiling.
 License: GPL (>= 2)
 Imports: 
     Rcpp (>= 1.0.4),
@@ -16,7 +16,15 @@ Imports:
     magrittr,
     methods,
     multimode,
-    tibble
+    tibble,
+    clusterProfiler,
+    enrichplot,
+    ggwordcloud,
+    tidyr,
+    tidytext,
+    SingleCellExperiment
 LinkingTo: Rcpp, RcppEigen
 Encoding: UTF-8
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)

@@ -23,9 +23,6 @@ basisTest(S, X, return_fig = FALSE, adj_method = "BH", mc.cores = 10, nrow = 4)
 Perform data-driven basis selection to remove useless bases and keep informative bases. It contains two approaches:
 (1) examine bases by correlations with cell library sizes; (2) examine bases by multimodality tests.
 }
-\details{
-
-}
 \author{
 Dongyuan Song
 }

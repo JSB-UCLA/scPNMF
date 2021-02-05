@@ -8,8 +8,6 @@
 #' @param mc.cores The number of cores to use.
 #' @param nrow Rows for facets in plots.
 #' 
-#' @details 
-#' 
 #' @importFrom magrittr %>%
 #' @importFrom methods is
 #' @import ggplot2

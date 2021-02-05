@@ -1,17 +1,18 @@
 #' Basis selection function
 #'
-#' @param W 
-#' @param S 
-#' @param X 
-#' @param toTest 
-#' @param cor_thres 
-#' @param pval_thres 
-#' @param return_fig 
-#' @param adj_method 
-#' @param mc.cores 
-#' @param nrow 
-#' @param toAnnotate 
-#' @param dim_use 
+#' @param W The weight matrix output by PNMF
+#' @param S The score matrix output by PNMF
+#' @param X The input gene by cell logcount matrix
+#' @param toTest Whether to select bases by Pearson correlation w/ cell library size and test of multimodality
+#' @param cor_thres Pearson correlation w/ cell library size cutoff. Default is 0.7.
+#' @param pval_thres Adjusted p-value cutoff on test of multimodality. Default is 0.01.
+#' @param return_fig Whether to print scatter plot of score vector against cell library size and distribution of score vectors for each basis.
+#' @param adj_method P-value correction method. Default is "BH".
+#' @param mc.cores The number of cores to use for function mclapply().
+#' @param nrow Rows for facets in plots.
+#' @param toAnnotate Whether to perform Gene Ontology (GO) enrichment analysis on each basis
+#' @param dim_use The bases (columns) to be used in the selected weight matrix, \code{NULL} value uses all bases
+#'
 #'
 #' @return The selected weight matrix
 #' @export 

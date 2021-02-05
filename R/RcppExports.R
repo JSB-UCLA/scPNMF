@@ -2,14 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 PNMF_EucDistC <- function(X, W_init, tol, maxIter, verboseN, zerotol) {
-    .Call(`_scPNMF_PNMF_EucDistC`, X, W_init, tol, maxIter, verboseN, zerotol)
+    .Call('_scPNMF_PNMF_EucDistC', PACKAGE = 'scPNMF', X, W_init, tol, maxIter, verboseN, zerotol)
 }
 
 PNMF_KLC <- function(X, W_init, tol, maxIter, verboseN, zerotol) {
-    .Call(`_scPNMF_PNMF_KLC`, X, W_init, tol, maxIter, verboseN, zerotol)
+    .Call('_scPNMF_PNMF_KLC', PACKAGE = 'scPNMF', X, W_init, tol, maxIter, verboseN, zerotol)
 }
 
 DPNMFC <- function(X, W_init, tol, maxIter, verboseN, zerotol, Xord, clunum, mu, lambda) {
-    .Call(`_scPNMF_DPNMFC`, X, W_init, tol, maxIter, verboseN, zerotol, Xord, clunum, mu, lambda)
+    .Call('_scPNMF_DPNMFC', PACKAGE = 'scPNMF', X, W_init, tol, maxIter, verboseN, zerotol, Xord, clunum, mu, lambda)
 }
 
