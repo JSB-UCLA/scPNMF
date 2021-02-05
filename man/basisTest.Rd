@@ -4,7 +4,7 @@
 \alias{basisTest}
 \title{Data-driven basis selection}
 \usage{
-basisTest(S, X, return_fig = FALSE, adj_method = "BH", mc.cores = 10, nrow = 4)
+basisTest(S, X, return_fig = FALSE, adj_method = "BH", mc.cores = 10, ncol = 4)
 }
 \arguments{
 \item{S}{The score matrix of scPNMF.}
@@ -17,7 +17,7 @@ basisTest(S, X, return_fig = FALSE, adj_method = "BH", mc.cores = 10, nrow = 4)
 
 \item{mc.cores}{The number of cores to use.}
 
-\item{nrow}{Rows for facets in plots.}
+\item{ncol}{Columns for facets in plots.}
 }
 \description{
 Perform data-driven basis selection to remove useless bases and keep informative bases. It contains two approaches:

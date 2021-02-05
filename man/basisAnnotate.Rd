@@ -7,7 +7,7 @@
 basisAnnotate(
   W,
   DE_prop = 0.1,
-  dim_use = 1:2,
+  dim_use = NULL,
   id_type = "SYMBOL",
   ont = "BP",
   OrgDb = "org.Hs.eg.db",

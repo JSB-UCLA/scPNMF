@@ -1,4 +1,6 @@
-#' Basis selection function
+#' @title Perform basis selection
+#' 
+#' @description Wrapper of basis annotation and data-driven basis selection.
 #'
 #' @param W The weight matrix output by PNMF
 #' @param S The score matrix output by PNMF
@@ -9,7 +11,7 @@
 #' @param return_fig Whether to print scatter plot of score vector against cell library size and distribution of score vectors for each basis.
 #' @param adj_method P-value correction method. Default is "BH".
 #' @param mc.cores The number of cores to use for function mclapply().
-#' @param nrow Rows for facets in plots.
+#' @param ncol Columns for facets in plots.
 #' @param toAnnotate Whether to perform Gene Ontology (GO) enrichment analysis on each basis
 #' @param dim_use The bases (columns) to be used in the selected weight matrix, \code{NULL} value uses all bases
 #'
@@ -22,7 +24,7 @@
 #' 
 basisSelect <- function(W, S = NULL, X = NULL, 
                         toTest = TRUE, cor_thres = 0.7, pval_thres = 0.01, 
-                        return_fig = FALSE, adj_method = "BH", mc.cores = 10, nrow = 4,
+                        return_fig = FALSE, adj_method = "BH", mc.cores = 10, ncol = 4,
                         toAnnotate = FALSE, dim_use = NULL
 ) {
   
@@ -33,7 +35,7 @@ basisSelect <- function(W, S = NULL, X = NULL,
   
   if (toTest) {
     stopifnot(!is.null(S) & !is.null(X))
-    resTest <- basisTest(S = S, X = X, return_fig = return_fig, adj_method = adj_method, mc.cores = mc.cores, nrow = nrow)
+    resTest <- basisTest(S = S, X = X, return_fig = return_fig, adj_method = adj_method, mc.cores = mc.cores, ncol = ncol)
     dim_Test <- which(resTest$cor_value <= cor_thres | resTest$adj_pvalue <= pval_thres)
     dim_selected <- intersect(dim_selected, dim_Test)
     if (return_fig) {

@@ -31,7 +31,7 @@
 
 basisAnnotate <- function(W,
                           DE_prop = 0.1,
-                          dim_use = 1:2,
+                          dim_use = NULL,
                           id_type = "SYMBOL",
                           ont = "BP",
                           OrgDb = "org.Hs.eg.db",
@@ -44,15 +44,19 @@ basisAnnotate <- function(W,
                           cat_num = 10, 
                           word_num = 50
 ) {
-  stopifnot(!is.null(rownames(W)))
   
-  Cluster <- ID <- Description <- word <- NULL
+  Cluster <- ID <- Description <- word <- n <- NULL
+  
+  if(is.null(rownames(W))) {
+    stop("Input matrix must contain row names!")
+  }
   
   gene_num <- dim(W)[1]
   basis_num <- dim(W)[2]
   
   colnames(W) <- paste0("Basis", 1:basis_num)
   
+  if(is.null(dim_use)) dim_use <- 1:(dim(W)[2])
   
   
   gene_list <- getInfoGene(W = W,
@@ -92,7 +96,7 @@ basisAnnotate <- function(W,
       
       p <-  dat_p %>% tidytext::unnest_tokens(word, Description, token = "ngrams", n = 2) %>%
         #anti_join(stop_words) %>%
-        count(word, sort = TRUE) %>%
+        dplyr::count(word, sort = TRUE) %>%
         dplyr::filter(n >= 2) %>%
         dplyr::filter(!sapply(word, function(x) {
           (grepl("^of", x) | grepl("of$", x)  | grepl("^and", x) | grepl("and$", x) | grepl("^to", x) | grepl("to$", x) | grepl("^via", x) | grepl("via$", x)   )

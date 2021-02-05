@@ -2,7 +2,7 @@
 % Please edit documentation in R/basisSelect.R
 \name{basisSelect}
 \alias{basisSelect}
-\title{Basis selection function}
+\title{Perform basis selection}
 \usage{
 basisSelect(
   W,
@@ -14,7 +14,7 @@ basisSelect(
   return_fig = FALSE,
   adj_method = "BH",
   mc.cores = 10,
-  nrow = 4,
+  ncol = 4,
   toAnnotate = FALSE,
   dim_use = NULL
 )
@@ -38,7 +38,7 @@ basisSelect(
 
 \item{mc.cores}{The number of cores to use for function mclapply().}
 
-\item{nrow}{Rows for facets in plots.}
+\item{ncol}{Columns for facets in plots.}
 
 \item{toAnnotate}{Whether to perform Gene Ontology (GO) enrichment analysis on each basis}
 
@@ -48,5 +48,5 @@ basisSelect(
 The selected weight matrix
 }
 \description{
-Basis selection function
+Wrapper of basis annotation and data-driven basis selection.
 }
