@@ -64,7 +64,8 @@ basisAnnotate <- function(W,
                            by_basis = TRUE,
                            dim_use = dim_use)
   
-  name_vec <- names(gene_list)
+  name_vec <- colnames(W)[dim_use]
+  names(gene_list) <- name_vec
   
   
   pnmf_comp <- clusterProfiler::compareCluster(geneClusters = gene_list, 

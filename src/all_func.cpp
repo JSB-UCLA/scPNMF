@@ -69,6 +69,9 @@ Eigen::MatrixXd PNMF_EucDistC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double 
   
   // iterations
   for (iter = 0; iter < maxIter; iter++) {
+    if (verboseN && iter % 100 == 0) {
+      Rprintf("%d iterations used.\n", iter);
+    }
     W_old = W;
     
     XXW = XX * W;
@@ -88,9 +91,6 @@ Eigen::MatrixXd PNMF_EucDistC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double 
     }
   }
   
-  if (verboseN) {
-    Rprintf("%d iterations used.\n", (iter+1));
-  }
   return (W);
   
 }
@@ -108,6 +108,9 @@ Eigen::MatrixXd PNMF_KLC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double tol, 
   
   // iterations
   for (iter = 0; iter < maxIter; iter++) {
+    if (verboseN && iter % 100 == 0) {
+      Rprintf("%d iterations used.\n", iter);
+    }
     W_old = W;
     // QuotientLB
     WWX = MatFindlb(W * (W.transpose() * X), zerotol);
@@ -132,9 +135,6 @@ Eigen::MatrixXd PNMF_KLC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double tol, 
     }
   }
   
-  if (verboseN) {
-    Rprintf("%d iterations used.\n", (iter+1));
-  }
   return (W);
   
 }
@@ -163,6 +163,9 @@ Eigen::MatrixXd DPNMFC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double tol, in
   
   // iterations
   for (iter = 0; iter < maxIter; iter++) {
+    if (verboseN && iter % 100 == 0) {
+      Rprintf("%d iterations used.\n", iter);
+    }
     W_old = W;
     
     XXW = XX * W;
@@ -181,9 +184,6 @@ Eigen::MatrixXd DPNMFC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double tol, in
     }
   }
   
-  if (verboseN) {
-    Rprintf("%d iterations used.\n", (iter+1));
-  }
   return (W);
   
 }

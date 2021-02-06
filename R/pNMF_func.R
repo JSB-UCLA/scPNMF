@@ -4,7 +4,7 @@
 #' Fast Projective Nonnegative Matrix Factorization Realizatiton based on Euclidean Distance / KL Divergence / Discriminant pNMF.
 #'
 #' @param X Input data matrix, where rows represent features (genes), columns represent samples (cells).
-#' @param rank Specification of the factorization rank (number of low dimension).
+#' @param K Specification of the factorization rank (number of low dimension).
 #' @param tol A threshold below which would be considered converged. Default is 1e-3.
 #' @param maxIter Number of max iteration times. Default is 500.
 #' @param verboseN A boolean value indicating whether to print number of iterations.
@@ -29,8 +29,8 @@
 #' 
 #' @return A list with components:
 #' \describe{
-#'   \item{\code{basis}}{The basis of model fit (\eqn{W}).}
-#'   \item{\code{ld}}{The mapped scores (\eqn{W^TX}), which is the dimension reduced result.}
+#'   \item{\code{Weight}}{The basis of model fit (\eqn{W}).}
+#'   \item{\code{Score}}{The mapped scores (\eqn{W^TX}), which is the dimension reduced result.}
 #' }
 #' 
 #' @importFrom irlba irlba
@@ -48,7 +48,7 @@
 #' 
 #'
 PNMFfun <- function(X, 
-                    rank=10, 
+                    K=10, 
                     tol=1e-3, 
                     maxIter=500, 
                     verboseN=FALSE, 
@@ -58,9 +58,16 @@ PNMFfun <- function(X,
                     mu=1, 
                     lambda=0.01, 
                     seed=123) {
+  if (is.null(rownames(X))) {
+    stop("Gene names missing!")
+  }
+  if (is.null(colnames(X))) {
+    stop("Cell names missing!")
+  }
+  
   #nmfmod <- NMF::nmf(X, rank)
   set.seed(seed)
-  Init <- irlba(X, nv = rank)
+  Init <- irlba(X, nv = K)
   Winit <- Init$u
   Winit <- abs(Winit)
   
@@ -89,7 +96,12 @@ PNMFfun <- function(X,
     ld <- t(X) %*% W
   }
   
-  return(list(basis=W, coef=ld))
+  rownames(W) <- rownames(X)
+  rownames(ld) <- colnames(X) 
+  colnames(W) <- paste0("Basis", 1:K)
+  colnames(ld) <- paste0("Basis", 1:K)
+  
+  return(list(Weight=W, Score=ld))
 }
 
 

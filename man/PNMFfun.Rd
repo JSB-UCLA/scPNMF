@@ -6,12 +6,12 @@
 \usage{
 PNMFfun(
   X,
-  rank = 10,
+  K = 10,
   tol = 0.001,
   maxIter = 500,
   verboseN = FALSE,
   zerotol = 1e-10,
-  method = "KL",
+  method = "EucDist",
   label = NULL,
   mu = 1,
   lambda = 0.01,
@@ -21,7 +21,7 @@ PNMFfun(
 \arguments{
 \item{X}{Input data matrix, where rows represent features (genes), columns represent samples (cells).}
 
-\item{rank}{Specification of the factorization rank (number of low dimension).}
+\item{K}{Specification of the factorization rank (number of low dimension).}
 
 \item{tol}{A threshold below which would be considered converged. Default is 1e-3.}
 
@@ -44,8 +44,8 @@ PNMFfun(
 \value{
 A list with components:
 \describe{
-  \item{\code{basis}}{The basis of model fit (\eqn{W}).}
-  \item{\code{ld}}{The mapped scores (\eqn{W^TX}), which is the dimension reduced result.}
+  \item{\code{Weight}}{The basis of model fit (\eqn{W}).}
+  \item{\code{Score}}{The mapped scores (\eqn{W^TX}), which is the dimension reduced result.}
 }
 }
 \description{
