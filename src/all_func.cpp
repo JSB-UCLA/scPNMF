@@ -69,8 +69,8 @@ Eigen::MatrixXd PNMF_EucDistC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double 
   
   // iterations
   for (iter = 0; iter < maxIter; iter++) {
-    if (verboseN && iter % 100 == 0) {
-      Rprintf("%d iterations used.\n", iter);
+    if (verboseN && (iter+1) % 100 == 0) {
+      Rprintf("%d iterations used.\n", (iter+1));
     }
     W_old = W;
     
@@ -108,8 +108,8 @@ Eigen::MatrixXd PNMF_KLC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double tol, 
   
   // iterations
   for (iter = 0; iter < maxIter; iter++) {
-    if (verboseN && iter % 100 == 0) {
-      Rprintf("%d iterations used.\n", iter);
+    if (verboseN && (iter+1) % 100 == 0) {
+      Rprintf("%d iterations used.\n", (iter+1));
     }
     W_old = W;
     // QuotientLB
@@ -163,8 +163,8 @@ Eigen::MatrixXd DPNMFC(Eigen::MatrixXd X, Eigen::MatrixXd W_init, double tol, in
   
   // iterations
   for (iter = 0; iter < maxIter; iter++) {
-    if (verboseN && iter % 100 == 0) {
-      Rprintf("%d iterations used.\n", iter);
+    if (verboseN && (iter+1) % 100 == 0) {
+      Rprintf("%d iterations used.\n", (iter+1));
     }
     W_old = W;
     

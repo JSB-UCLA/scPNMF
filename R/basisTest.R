@@ -29,7 +29,7 @@ basisTest <- function(S,
 ) {
   
   basis <- Score <- NULL
-  cell_lib_size <- rowSums(X)
+  cell_lib_size <- colSums(X)
   
   cell_num <- dim(S)[1]
   basis_num <- dim(S)[2]

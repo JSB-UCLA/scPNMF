@@ -4,11 +4,11 @@ library(scPNMF)
 test_that("scPNMF works", {
   data(zheng4)
   
-  X <- zheng4@assays@data@listData$logcounts[1:1000, 1:1000]
+  X <- zheng4@assays@data@listData$logcounts#[1:1000, 1:1000]
   
   res_pnmf <- scPNMF::PNMFfun(X = X,
                               K = 10,
-                              method="EucDist",
+                              method="EucDist", tol=1e-4, maxIter=1000,
                               verboseN = TRUE)
   W <- res_pnmf$Weight
   S <- res_pnmf$Score
