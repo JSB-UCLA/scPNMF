@@ -4,7 +4,7 @@
 \alias{getInfoGene}
 \title{Get informative genes}
 \usage{
-getInfoGene(W, M = 100, by_basis = FALSE, dim_use = NULL)
+getInfoGene(W, M = 100, by_basis = FALSE, return_trunW = FALSE, dim_use = NULL)
 }
 \arguments{
 \item{W}{The weight matrix output by PNMF}
@@ -12,6 +12,8 @@ getInfoGene(W, M = 100, by_basis = FALSE, dim_use = NULL)
 \item{M}{The user-defined informative gene number}
 
 \item{by_basis}{Return informative genes by basis or not}
+
+\item{return_trunW}{Return the truncated weight matrix or not}
 
 \item{dim_use}{The bases (columns) to be used in the selected weight matrix, \code{NULL} value uses all bases}
 }

@@ -62,7 +62,7 @@ basisAnnotate <- function(W,
   gene_list <- getInfoGene(W = W,
                            M = round(DE_prop*gene_num),
                            by_basis = TRUE,
-                           dim_use = dim_use)
+                           dim_use = dim_use)$InfoGene
   
   name_vec <- colnames(W)[dim_use]
   names(gene_list) <- name_vec
@@ -108,9 +108,9 @@ basisAnnotate <- function(W,
     
     names(p_wordcloud) <- name_vec
     
-    return(list(p_comp = p_comp, p_wordcloud = p_wordcloud, go_res = pnmf_comp))
+    return(list(go_res = pnmf_comp, p_comp = p_comp, p_wordcloud = p_wordcloud))
   }
-  else return(pnmf_comp)
+  else return(list(go_res = pnmf_comp, p_comp = NULL, p_wordcloud = NULL))
 }
 
 

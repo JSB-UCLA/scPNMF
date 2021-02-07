@@ -3,6 +3,7 @@
 #' @param W The weight matrix output by PNMF
 #' @param M The user-defined informative gene number
 #' @param by_basis Return informative genes by basis or not 
+#' @param return_trunW Return the truncated weight matrix or not 
 #' @param dim_use The bases (columns) to be used in the selected weight matrix, \code{NULL} value uses all bases
 #'
 #' @return A vector containing M top informative genes
@@ -10,20 +11,26 @@
 #'
 #'
 #'
-getInfoGene <- function(W, M = 100, by_basis = FALSE, dim_use = NULL) {
+getInfoGene <- function(W, M = 100, by_basis = FALSE, return_trunW = FALSE, dim_use = NULL) {
   W_s <- W
   if (!is.null(dim_use)) {
     W_s <- W[, dim_use]
   }
   ResMTrun <- .MTruncation(W_s = W_s, M = M)
   W_sM <- ResMTrun$W_sM
+  output_W_sM <- NULL
+  if (return_trunW) {
+    output_W_sM <- W_sM
+  }
   
   if (by_basis) {
-    return(lapply(1:dim(W_sM)[2], function(k) {
+    output_InfoGene <- lapply(1:dim(W_sM)[2], function(k) {
       ResMTrun$InfoGene[W_sM[,k] > 0]
-      }))
+    })
+    names(output_InfoGene) <- colnames(W)
+    return(list(InfoGene = output_InfoGene, trunW = output_W_sM))
   } else {
-    return(ResMTrun$InfoGene)
+    return(list(InfoGene = ResMTrun$InfoGene, trunW = output_W_sM))
   }
 }
 

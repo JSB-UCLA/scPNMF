@@ -49,14 +49,15 @@ basisTest <- function(S,
     dat <- S %>% as_tibble() %>% dplyr::mutate(cell_lib_size = cell_lib_size)
     dat_long <- dat %>% tidyr::pivot_longer(dplyr::starts_with("Basis"), names_to = "basis", values_to = "Score") %>% dplyr::mutate(basis = factor(basis, levels = colnames(S)))
     
-    p_scatter <- dat_long %>% ggplot(aes(y = Score, x = cell_lib_size)) + geom_point(alpha = 0.5, size = 0.2) + facet_wrap(~basis,  scales = "free", ncol = ncol) + xlab("Cell lib size") +theme_bw() + theme(legend.position = "bottom", aspect.ratio = 1, axis.text.x = element_text(angle = 45, hjust = 1)) + guides(color = guide_legend(override.aes = list(size=5)))
+    p_scatter <- dat_long %>% ggplot(aes(y = Score, x = cell_lib_size)) + geom_point(alpha = 0.5, size = 0.2) + facet_wrap(~basis,  scales = "free", ncol = ncol) + xlab("Cell lib size") + ggtitle("Correlations with cell library sizes") +theme_bw() + theme(legend.position = "bottom", aspect.ratio = 1, axis.text.x = element_text(angle = 45, hjust = 1)) + guides(color = guide_legend(override.aes = list(size=5)))
     
-    p_hist <- dat_long %>% ggplot(aes(x = Score)) + geom_histogram(color = "black", fill = "white") + facet_wrap(~basis, scales = "free", ncol = ncol) +theme_bw() + theme(legend.position = "bottom", aspect.ratio = 1)+ guides(color = guide_legend(override.aes = list(size=5))) + ylab("Count")
+    p_hist <- dat_long %>% ggplot(aes(x = Score)) + geom_histogram(color = "black", fill = "white") + facet_wrap(~basis, scales = "free", ncol = ncol) + ggtitle("Multimodality") +theme_bw() + theme(legend.position = "bottom", aspect.ratio = 1)+ guides(color = guide_legend(override.aes = list(size=5))) + ylab("Count")
     
+    p <- gridExtra::grid.arrange(p_scatter, p_hist, nrow = 2)
     
-    return(list(p_scatter = p_scatter, p_hist = p_hist, cor_value = cor_value, adj_pvalue = adj_pvalue))
+    return(list(cor_value = cor_value, adj_pvalue = adj_pvalue, fig = p))
   }
-  else return(list(cor_value = cor_value, adj_pvalue = adj_pvalue))
+  else return(list(cor_value = cor_value, adj_pvalue = adj_pvalue, fig = NULL))
   
   
 }

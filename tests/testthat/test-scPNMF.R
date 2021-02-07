@@ -4,7 +4,7 @@ library(scPNMF)
 test_that("scPNMF works", {
   data(zheng4)
   
-  X <- zheng4@assays@data@listData$logcounts#[1:1000, 1:1000]
+  X <- zheng4@assays@data@listData$logcounts
   
   res_pnmf <- scPNMF::PNMFfun(X = X,
                               K = 10,
@@ -30,7 +30,7 @@ test_that("scPNMF works", {
                                 X,
                                 return_fig = TRUE,
                                 mc.cores = 1)
-  expect_equal(length(res_test), 4)
+  expect_equal(length(res_test), 3)
   
   
   res_select <- scPNMF::basisSelect(W,
@@ -40,6 +40,6 @@ test_that("scPNMF works", {
   
   
   res_gene <- scPNMF::getInfoGene(W = res_select)
-  expect_equal(is.vector(res_gene), TRUE)
+  expect_equal(is.vector(res_gene$InfoGene), TRUE)
   
 })

@@ -22,13 +22,15 @@ Imports:
     ggwordcloud,
     tidyr,
     tidytext,
-    SingleCellExperiment
+    SingleCellExperiment,
+    gridExtra
 LinkingTo: Rcpp, RcppEigen
 Encoding: UTF-8
 RoxygenNote: 7.1.1
 Depends: 
     R (>= 2.10)
 Suggests: 
-    testthat, 
-    knitr
+    testthat,
+    knitr,
+    rmarkdown
 VignetteBuilder: knitr
