@@ -48,7 +48,7 @@ getProjection <- function(X, W_sM) {
   stopifnot(!is.null(rownames(W_sM)))
   
   X_M <- X[rownames(X) %in% rownames(W_sM), ]
-  S_M <- t(W_sM) %*% X_M
+  S_M <- t(X_M) %*% W_sM
   
   return(S_M)
 }
