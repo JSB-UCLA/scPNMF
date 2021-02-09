@@ -31,7 +31,6 @@ suppressPackageStartupMessages(library(scPNMF))
 suppressPackageStartupMessages(library(SingleCellExperiment))
 suppressPackageStartupMessages(library(umap))
 suppressPackageStartupMessages(library(ggplot2))
-set.seed(123)
 ```
 
 *scPNMF* is a method to facilitate gene selection for targeted gene profiling by learning a sparse gene encoding of single cells. Compared with existing gene selection methods, *scPNMF* has two advantages. First, its selected informative genes can better distinguish cell types, with a small number, e.g., < 200 gene. Second, it enables the alignment of new targeted gene profiling data with reference data in a low-dimensional space to help the prediction of cell types in the new data.
@@ -59,7 +58,7 @@ PNMF | $\min\limits_{\mathbf{W}} \|\mathbf{X} - \mathbf{W}\mathbf{W}^T\mathbf{X}
 PCA | $\min\limits_{\mathbf{W}} \|\mathbf{X} - \mathbf{W}\mathbf{W}^T\mathbf{X}\|\ s.t.\ \mathbf{W}^T\mathbf{W} = \mathbf{I}$ | No | Low | Low | Yes
 NMF | $\min\limits_{\mathbf{W}, \mathbf{H}} \|\mathbf{X} - \mathbf{W}\mathbf{H}\|\ s.t.\ \mathbf{W},\mathbf{H}\geq 0$ | Yes | High | High | No
 
-We run the PNMF algorithm. $K$, the number of low dimension, is a key parameter that needs to be pre-specified by users. For a typical scRNA-seq data, $K=20$ is recommended in our *scPNMF* paper. But here we use $K=10$ for demonstration purpose in the vignette.
+We run the PNMF algorithm. $K$, the number of low dimension, is a key parameter that needs to be pre-specified by users. For a typical scRNA-seq data, $K=20$ is recommended in our *scPNMF* paper. Here we set $K=15$ for demonstration purpose.
 ```{r PNMF}
 res_pnmf <- scPNMF::PNMFfun(X = Input_zheng4,
                             K = 15, method="EucDist", tol=1e-4, maxIter=1000, verboseN = TRUE)
@@ -116,6 +115,7 @@ colnames(W_select)
 
 *scPNMF* can work as a dimensionality reduction method. Empirically, the result is similar to PCA. Here we use UMAP plot to visualize the reduced space. The cells (dots) are colored by the originally given cell type labels.
 ```{r umap}
+set.seed(123)
 S_select <- t(Input_zheng4) %*% W_select
 cell_type <- colData(zheng4)$phenoid
 umap_select <- data.frame(umap(S_select)$layout, cell_type)
@@ -133,7 +133,7 @@ ggplot(umap_select, aes(x=UMAP1, y=UMAP2)) + geom_point(size=0.1, alpha=1, aes(c
 
 The most important application of *scPNMF* is to select informative genes (often called highly-variable genes) in an unsupervised way. Compared to other gene selection methods, *scPNMF* works well with a small informative gene number budget. Here we set the pre-specified gene number as $M = 100$.
 ```{r infogene}
-ig <- getInfoGene(W_select, M = 50, by_basis = FALSE, return_trunW = TRUE, dim_use = NULL)
+ig <- getInfoGene(W_select, M = 100, by_basis = FALSE, return_trunW = TRUE, dim_use = NULL)
 print(ig$InfoGene)
 ```
 
@@ -151,6 +151,7 @@ S_new <- getProjection(Input_zheng4[ig$InfoGene, ], ig$trunW)
 
 We still use a UMAP plot to visualize the low-dimensional space with $M=100$ genes. 
 ```{r umap2}
+set.seed(456)
 cell_type <- colData(zheng4)$phenoid
 umap_new <- data.frame(umap(S_new)$layout, cell_type)
 colnames(umap_new) <- c("UMAP1", "UMAP2", "cell_type")
