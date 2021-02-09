@@ -16,6 +16,7 @@ getInfoGene <- function(W, M = 100, by_basis = FALSE, return_trunW = FALSE, dim_
   if (!is.null(dim_use)) {
     W_s <- W[, dim_use]
   }
+  
   ResMTrun <- .MTruncation(W_s = W_s, M = M)
   W_sM <- ResMTrun$W_sM
   output_W_sM <- NULL
@@ -27,7 +28,7 @@ getInfoGene <- function(W, M = 100, by_basis = FALSE, return_trunW = FALSE, dim_
     output_InfoGene <- lapply(1:dim(W_sM)[2], function(k) {
       ResMTrun$InfoGene[W_sM[,k] > 0]
     })
-    names(output_InfoGene) <- colnames(W)
+    names(output_InfoGene) <- colnames(W_s)
     return(list(InfoGene = output_InfoGene, trunW = output_W_sM))
   } else {
     return(list(InfoGene = ResMTrun$InfoGene, trunW = output_W_sM))

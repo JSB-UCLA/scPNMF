@@ -11,8 +11,8 @@ output:
   BiocStyle::html_document:
     highlight: pygments
     toc: true
-    fig_width: 16
-    fig_height: 8
+    fig_width: 10
+    fig_height: 5
 vignette: >
   %\VignetteIndexEntry{scPNMF}
   %\VignetteEngine{knitr::rmarkdown}
@@ -31,6 +31,7 @@ suppressPackageStartupMessages(library(scPNMF))
 suppressPackageStartupMessages(library(SingleCellExperiment))
 suppressPackageStartupMessages(library(umap))
 suppressPackageStartupMessages(library(ggplot2))
+set.seed(123)
 ```
 
 *scPNMF* is a method to facilitate gene selection for targeted gene profiling by learning a sparse gene encoding of single cells. Compared with existing gene selection methods, *scPNMF* has two advantages. First, its selected informative genes can better distinguish cell types, with a small number, e.g., < 200 gene. Second, it enables the alignment of new targeted gene profiling data with reference data in a low-dimensional space to help the prediction of cell types in the new data.
@@ -61,7 +62,7 @@ NMF | $\min\limits_{\mathbf{W}, \mathbf{H}} \|\mathbf{X} - \mathbf{W}\mathbf{H}\
 We run the PNMF algorithm. $K$, the number of low dimension, is a key parameter that needs to be pre-specified by users. For a typical scRNA-seq data, $K=20$ is recommended in our *scPNMF* paper. But here we use $K=10$ for demonstration purpose in the vignette.
 ```{r PNMF}
 res_pnmf <- scPNMF::PNMFfun(X = Input_zheng4,
-                            K = 10, method="EucDist", tol=1e-4, maxIter=1000, verboseN = TRUE)
+                            K = 15, method="EucDist", tol=1e-4, maxIter=1000, verboseN = TRUE)
 W <- res_pnmf$Weight
 S <- res_pnmf$Score
 ```
@@ -74,10 +75,10 @@ The second main step of *scPNMF* is to select informative bases among the $K$ ba
 
 ## Functional Annotations
 
-Due to the nice interpretability of PNMF, each basis briefly represents a funtional gene cluster. Users can perform Gene Ontology (GO) analysis to annoate each basis, and decide which bases they believe are useless and remove irrelevant bases. This is an **OPTIONAL** step since it requires prior knowledge from users.
+Due to the nice interpretability of PNMF, each basis briefly represents a funtional gene cluster. Users can perform Gene Ontology (GO) analysis to annoate each basis, and decide which bases they believe are useless and remove irrelevant bases. This is an **OPTIONAL** step since it requires prior knowledge from users. Here we demonstrate functional annotations on the first five bases by setting `dim_use = 1:5`.
 ```{r annotation}
 res_annotation <- scPNMF::basisAnnotate(W = W, 
-                                        dim_use = 1:10,
+                                        dim_use = 1:5,
                                         id_type = "ENSEMBL",
                                         return_fig = TRUE)
 plot(res_annotation$p_comp)
@@ -94,10 +95,9 @@ The default basis selection procedure in *scPNMF* is purely data-driven. We have
 The following function will perform the basis check and users can inspect the checking result by setting `return_fig = TRUE`.
 
 ```{r tests}
-res_test <- scPNMF::basisTest(S, X=Input_zheng4,
-                              return_fig = TRUE,
+res_test <- scPNMF::basisTest(S = S, X = Input_zheng4,
+                              return_fig = TRUE, ncol = 5,
                               mc.cores = 1)
-plot(res_test$fig)
 ```
 
 
@@ -105,7 +105,8 @@ plot(res_test$fig)
 
 The following wrapper function will select bases automatically.
 ```{r basisselect}
-W_select <- scPNMF::basisSelect(W, S, X=Input_zheng4, toTest = TRUE, toAnnotate = FALSE, mc.cores = 1)
+W_select <- scPNMF::basisSelect(W = W, S = S,
+                                X=Input_zheng4, toTest = TRUE, toAnnotate = FALSE, mc.cores = 1)
 colnames(W_select)
 ```
 
@@ -132,7 +133,7 @@ ggplot(umap_select, aes(x=UMAP1, y=UMAP2)) + geom_point(size=0.1, alpha=1, aes(c
 
 The most important application of *scPNMF* is to select informative genes (often called highly-variable genes) in an unsupervised way. Compared to other gene selection methods, *scPNMF* works well with a small informative gene number budget. Here we set the pre-specified gene number as $M = 100$.
 ```{r infogene}
-ig <- getInfoGene(W_select, M = 100, by_basis = FALSE, return_trunW = TRUE, dim_use = NULL)
+ig <- getInfoGene(W_select, M = 50, by_basis = FALSE, return_trunW = TRUE, dim_use = NULL)
 print(ig$InfoGene)
 ```
 
