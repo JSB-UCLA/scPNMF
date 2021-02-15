@@ -1,5 +1,4 @@
 # scPNMF
-
 A dimensionality reduction method to facilitate gene selection for targeted gene profiling by learning a sparse gene encoding of single cells.
 
 ## Introduction
