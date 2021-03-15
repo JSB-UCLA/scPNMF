@@ -17,7 +17,7 @@ install_github("JSB-UCLA/scPNMF")
 
 ## Usage
 
-For detailed info on `scPNMF` method and applications, please check out the package [vignettes](https://htmlpreview.github.io/?https://github.com/JSB-UCLA/scPNMF/blob/main/inst/docs/scPNMF.html), or with the following code in `R`: 
+For detailed info on `scPNMF` method and applications, please check out the package [vignettes](https://htmlpreview.github.io/?https://github.com/JSB-UCLA/Vignettes/blob/master/A%20quick%20start%20of%20PseudotimeDE.html), or with the following code in `R`: 
 
 ``` r
 install_github("JSB-UCLA/scPNMF", build_vignettes = TRUE)
