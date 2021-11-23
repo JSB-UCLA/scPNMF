@@ -67,6 +67,11 @@ basisAnnotate <- function(W,
   name_vec <- colnames(W)[dim_use]
   names(gene_list) <- name_vec
   
+  if (id_type == "SYMBOL") {
+    readable_flag <- FALSE
+  } else {
+    readable_flag <- TRUE
+  }
   
   pnmf_comp <- clusterProfiler::compareCluster(geneClusters = gene_list, 
                                                keyType = id_type, 
@@ -79,7 +84,7 @@ basisAnnotate <- function(W,
                                                pAdjustMethod = "BH",
                                                minGSSize = minGSSize,
                                                maxGSSize = maxGSSize,
-                                               readable = TRUE)
+                                               readable = readable_flag)
   
   if(simp) pnmf_comp <- clusterProfiler::simplify(pnmf_comp, cutoff=0.7, by="p.adjust", select_fun=min)
   

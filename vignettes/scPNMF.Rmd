@@ -58,7 +58,7 @@ PNMF | $\min\limits_{\mathbf{W}} \|\mathbf{X} - \mathbf{W}\mathbf{W}^T\mathbf{X}
 PCA | $\min\limits_{\mathbf{W}} \|\mathbf{X} - \mathbf{W}\mathbf{W}^T\mathbf{X}\|\ s.t.\ \mathbf{W}^T\mathbf{W} = \mathbf{I}$ | No | Low | Low | Yes
 NMF | $\min\limits_{\mathbf{W}, \mathbf{H}} \|\mathbf{X} - \mathbf{W}\mathbf{H}\|\ s.t.\ \mathbf{W},\mathbf{H}\geq 0$ | Yes | High | High | No
 
-We run the PNMF algorithm. $K$, the number of low dimension, is a key parameter that needs to be pre-specified by users. For a typical scRNA-seq data, $K=20$ is recommended in our *scPNMF* paper. Here we set $K=15$ for demonstration purpose.
+We run the PNMF algorithm. $K$, the number of low dimension, is a key parameter that needs to be pre-specified by users. We proposed a metric $dev.ortho$ (normalized difference between $W^TW$ and $I$) in Section S1.1 of our *scPNMF* paper to select $K$, which is implemented in `K_selection()` function. However, for the purpose of saving time as well as getting a stable result, we recommend the users to directly set $K=20$ on a typical scRNA-seq data. Here we use $K=15$ for demonstration purpose.
 ```{r PNMF}
 res_pnmf <- scPNMF::PNMFfun(X = Input_zheng4,
                             K = 15, method="EucDist", tol=1e-4, maxIter=1000, verboseN = TRUE)
