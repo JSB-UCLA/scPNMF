@@ -28,3 +28,5 @@ browseVignettes("scPNMF")
 
 Any questions or suggestions on `scPNMF` are welcomed! Please report it on [issues](https://github.com/JSB-UCLA/scPNMF/issues), or contact Dongyuan Song (<dongyuansong@ucla.edu>) or Kexin Li (<aileenlikexin@outlook.com>).
 
+## Reference
+Dongyuan Song, Kexin Li, Zachary Hemminger, Roy Wollman, Jingyi Jessica Li, scPNMF: sparse gene encoding of single cells to facilitate gene selection for targeted gene profiling, *Bioinformatics*, Volume 37, Issue Supplement_1, July 2021, Pages i358–i366, https://doi.org/10.1093/bioinformatics/btab273
