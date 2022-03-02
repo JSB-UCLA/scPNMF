@@ -47,6 +47,15 @@
 #' }
 #' 
 #'
+#' @examples 
+#' data(zheng4)
+#' X <- SummarizedExperiment::assay(zheng4, "logcounts")
+#' res_pnmf <- scPNMF::PNMFfun(X = X,
+#'                            K = 3,
+#'                            method="EucDist", 
+#'                            tol=1e-4, 
+#'                            maxIter=100,
+#'                            verboseN = FALSE)
 PNMFfun <- function(X, 
                     K=10, 
                     tol=1e-3, 

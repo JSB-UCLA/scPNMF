@@ -1,12 +1,13 @@
 Package: scPNMF
 Type: Package
 Title: scPNMF: sparse gene encoding of single cells to facilitate gene selection for targeted gene profiling
-Version: 1.0
-Date: 2021-02-03
+Version: 1.0.1
+Date: 2022-03-01
 Author: Dongyuan Song, Kexin Li
 Maintainer: Dongyuan Song <dongyuansong@g.ucla.edu>, Kexin Li <aileenlikexin@outlook.com>
 Description: scPNMF: sparse gene encoding of single cells to facilitate gene selection for targeted gene profiling.
-License: GPL (>= 2)
+License: MIT + file LICENSE
+biocViews:
 Imports: 
     Rcpp,
     irlba,
@@ -22,14 +23,18 @@ Imports:
     ggwordcloud,
     tidyr,
     tidytext,
+    SummarizedExperiment,
     SingleCellExperiment,
     gridExtra,
-    umap
+    umap,
+    org.Hs.eg.db,
+    akmedoids,
+    BiocStyle
 LinkingTo: Rcpp, RcppEigen
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0)
 Suggests: 
     testthat,
     knitr,

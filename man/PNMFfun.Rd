@@ -63,6 +63,16 @@ The fitting result of PNMF shares characteristics of both PCA and NMF. The model
 a \code{basis} matrix, which is similar to the loading matrix in PCA. However, notice that
 unlike in PCA the first PC always represents the largest variation, each basis vectors are equal in PNMF.
 }
+\examples{
+data(zheng4)
+X <- SummarizedExperiment::assay(zheng4, "logcounts")
+res_pnmf <- scPNMF::PNMFfun(X = X,
+                           K = 3,
+                           method="EucDist", 
+                           tol=1e-4, 
+                           maxIter=100,
+                           verboseN = FALSE)
+}
 \references{
 \itemize{
 \item Yang, Z., & Oja, E. (2010). Linear and nonlinear projective nonnegative matrix factorization. IEEE Transactions on Neural Networks, 21(5), 734-749.

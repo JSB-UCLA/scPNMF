@@ -34,7 +34,6 @@
 #' 
 #' @author Kexin Li, \email{aileenlikexin@@outlook.com}
 #'
-#' @examples
 K_selection <- function(X, K.seq = 10L:30L, ncores = 1, 
                         tol = 1e-3, 
                         maxIter = 500, 
@@ -45,6 +44,8 @@ K_selection <- function(X, K.seq = 10L:30L, ncores = 1,
                         mu = 1, 
                         lambda = 0.01, 
                         seed = 123)  {
+  
+  K <- dev.ortho <- NULL
   
   dtmat <- as.matrix(X)
   if (is.null(rownames(dtmat))) {
@@ -98,7 +99,7 @@ K_selection <- function(X, K.seq = 10L:30L, ncores = 1,
   
   ### Find the elbow point of K
   # elbowpoints FROM akmedoids
-  dev.ortho.df.naomit <- na.omit(dev.ortho.df)
+  dev.ortho.df.naomit <- stats::na.omit(dev.ortho.df)
   ep <- akmedoids::elbow_point(dev.ortho.df.naomit[, 1], dev.ortho.df.naomit[, 2])$x
   ep <- round(ep) # the elbow point K value
   ptsize <- rep(1, nrow(dev.ortho.df.naomit))
