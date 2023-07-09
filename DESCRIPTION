@@ -23,20 +23,20 @@ Imports:
     ggwordcloud,
     tidyr,
     tidytext,
+    gridExtra,
+    signal
+Suggests: 
     SummarizedExperiment,
     SingleCellExperiment,
-    gridExtra,
-    umap,
     org.Hs.eg.db,
-    akmedoids,
+    testthat,
+    knitr,
+    rmarkdown,
+    umap,
     BiocStyle
 LinkingTo: Rcpp, RcppEigen
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Depends: 
     R (>= 4.0.0)
-Suggests: 
-    testthat,
-    knitr,
-    rmarkdown
 VignetteBuilder: knitr

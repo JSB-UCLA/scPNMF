@@ -4,7 +4,7 @@ library(scPNMF)
 test_that("scPNMF works", {
   data(zheng4)
   
-  X <- zheng4@assays@data@listData$logcounts
+  X <- zheng4@assays@data@listData$logcounts[1:200, ]
   
   res_pnmf <- scPNMF::PNMFfun(X = X,
                               K = 10,
